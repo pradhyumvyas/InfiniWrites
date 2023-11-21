@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import { useDispatch } from 'react-redux';
-import authService from "./appWrite/auth"
-import {login, logout} from "./store/authSlice"
+import authService from "./appWrite/auth.js"
+import {login, logout} from "./store/authSlice.js"
 import {Header, Footer} from "./components/index.js";
 
 function App() {

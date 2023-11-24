@@ -17,11 +17,14 @@ function PostForm({post}) {
       }
    })
    const navigate = useNavigate()
-   const userData = useSelector(state => state.user.userData)
+   const userData = useSelector((state) => {
+      console.log("state", state);
+      return state.auth.userData
+   })
 
    const submit = async(data) => {
       console.log(data)
-      if(data){
+      if(post){
          const file = data.image[0]?appWriteService.uploadFile(data.image[0]):null
 
          if(file){
@@ -39,11 +42,12 @@ function PostForm({post}) {
          const file = data.image[0] ? appWriteService.uploadFile(data.image[0]) : null
 
          if(file){
+            console.log("userData", userData);
             const fileId = file.$id
             data.image = fileId
             const dbPost = await appWriteService.createPost({
                ...data,
-               userId: userData.$id,
+               userId: userData?.$id,
             })
             if(dbPost){
                navigate(`/posts/${dbPost.$id}`)
@@ -57,11 +61,12 @@ function PostForm({post}) {
          return value
             .trim()
             .toLowerCase()
-            .replace(/^[a-zA-Z\d\s]+/g, "-")
-            .replace(/\s/g, "-")
+            .replace(/[^a-zA-Z\d\s]+/g, "-")
+            .replace(/\s/g, "-");
       }
-      return ''
+      return '';
    },[])
+   
    useEffect(() => {
       const subscription = watch((value, {name}) => {
          if(name === "title"){

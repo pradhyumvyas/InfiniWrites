@@ -4,7 +4,7 @@ import AllPost  from './AllPosts';
 import EditPost  from './EditPost';
 import Login  from './Login';
 import Signup  from './Signup';
-import AddPost from './AddPost';
+import AddPost from './AddPost'
 
 export  {
       Home, AddPost, Post, AllPost, EditPost, Login, Signup}

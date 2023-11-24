@@ -1,6 +1,6 @@
 import conf from "../conf/config.js";
 import { Client, Account, ID } from "appwrite";
-
+ 
 export class AuthService {
    client = new Client();
    account;
@@ -48,8 +48,7 @@ export class AuthService {
       try {
          return await this.account.get();
       } catch (error) {
-         console.error("Error:- getCurrentUser method");
-         throw error;
+         console.error("Error:- getCurrentUser method", error);
       }
 
       return null;

@@ -6,5 +6,5 @@ import Login  from './Login';
 import Signup  from './Signup';
 import AddPost from './AddPost';
 
-export {
+export  {
       Home, AddPost, Post, AllPost, EditPost, Login, Signup}

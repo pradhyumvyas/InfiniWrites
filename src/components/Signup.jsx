@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 
 function Signup() {
    const navigate = useNavigate();
-   const [error, setError] = useStae("")
+   const [error, setError] = useState("")
    const dispatch = useDispatch()
    const {register, handleSubmit} = useForm()
 

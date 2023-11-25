@@ -4,11 +4,9 @@ import {Container, PostCard} from '../index.js'
 
 function Home() {
    const [posts, setPosts] = useState([])
-   console.log("In Home componenet");
    useEffect(() => {
          appwriteService.getPosts([])
          .then((res) => {
-            console.log("res", res);
             if(res){
                setPosts(res.documents)
             }

@@ -18,7 +18,6 @@ function PostForm({post}) {
    })
    const navigate = useNavigate()
    const userData = useSelector((state) => {
-      console.log("state", state);
       return state.auth.userData
    })
 

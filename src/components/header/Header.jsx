@@ -5,11 +5,10 @@ import { useSelector } from 'react-redux'
 
 function Header() {
    const authStatus = useSelector((state)=>{
+      console.log("userr statetus",state.auth);
       return state.auth.status
    })
    const navigate = useNavigate();
-
-   console.log("authStatus   ===", authStatus)
 
    const navItems = [
       {
@@ -53,7 +52,6 @@ function Header() {
                   item.active ? (
                      <li key={item.name}> 
                         <button onClick={()=>{
-                           console.log("item sluggg", item);
                            navigate(item.slug)
                         }}
                         className='iinline-bock px-6 py-2 duration-200 hover:bg-blue-100 rounded-full'

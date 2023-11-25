@@ -11,16 +11,16 @@ function Login() {
    const dispatch = useDispatch();
    const {register, handleSubmit} = useForm();
    const [error, setError] = useState("")
+
    const login = async(data)=>{
       setError("")
       try {
          const session = await authService.loginAccount(data)
          if(session){
             const userData = await authService.getCurrentUser();
-            if(userData){
+            if(userData)
                dispatch(authLogin(userData));
                navigate("/")
-            }
          }
       } catch (error) {
          setError(error.message);

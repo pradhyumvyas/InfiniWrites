@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 
 
 function PostForm({post}) {
+
    const {register, handleSubmit, watch, setValue, control, getValues} = useForm({
       defaultValues: {
          title: post?.title || "",
@@ -20,9 +21,9 @@ function PostForm({post}) {
    const userData = useSelector((state) => {
       return state.auth.userData
    })
+   const [img, setImg] = React.useState(null)
 
    const submit = async(data) => {
-      console.log(data)
       if(post){
          const file = data.image[0]?appWriteService.uploadFile(data.image[0]):null
 
@@ -35,26 +36,25 @@ function PostForm({post}) {
             image: file ? file.$id :undefined,
          })
          if(dbPost){
-            navigate(`/posts/${dbPost.$id}`)
+            navigate(`/post/${dbPost.$id}`)
          }
       } else{
-         const file = data.image[0] ? appWriteService.uploadFile(data.image[0]) : null
+         
+         const file = await appWriteService.uploadFile(data.image[0])
 
          if(file){
-            console.log("userData", userData);
             const fileId = file.$id
             data.image = fileId
             const dbPost = await appWriteService.createPost({
                ...data,
-               userId: userData?.$id,
+               userId: userData?.data?.$id,
             })
             if(dbPost){
-               navigate(`/posts/${dbPost.$id}`)
+               navigate(`/post/${dbPost.$id}`)
             }
          }
       }
    }
-
    const slugTransform = useCallback((value) => {
       if(value && typeof value === "string"){
          return value
@@ -65,17 +65,23 @@ function PostForm({post}) {
       }
       return '';
    },[])
+
+
    
    useEffect(() => {
       const subscription = watch((value, {name}) => {
          if(name === "title"){
-            setValue("slug", slugTransform(value.title, {shouldValidate:true}))
+            setValue("slug", slugTransform(value.title), {shouldValidate: true})
          }
       })
-      return () =>{
-         subscription.unsubscribe()
+      if(post){
+         appWriteService.getFilePreview(post?.image)
+         .then((res) => {
+            setImg(res)
+         })
       }
-   },[watch("title"), slugTransform, setValue])
+      return () => subscription.unsubscribe();
+   },[watch, slugTransform, setValue]);
    
   return (
    <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
@@ -108,7 +114,7 @@ function PostForm({post}) {
          {post && (
            <div className="w-full mb-4">
                <img
-                   src={appwriteService.getFilePreview(post.featuredImage)}
+                   src={img}
                    alt={post.title}
                    className="rounded-lg"
                />

@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux'
 
 function Header() {
    const authStatus = useSelector((state)=>{
-      console.log("userr statetus",state.auth);
       return state.auth.status
    })
    const navigate = useNavigate();

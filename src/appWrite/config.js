@@ -25,7 +25,7 @@ export class Service{
             userId
          })
       } catch (error) {
-         console.log("createPost -- Error");
+         console.log("AppWrite:: createPost -- Error");
       }
    }
 
@@ -40,7 +40,7 @@ export class Service{
             userId
          })
       } catch (error) {
-         console.log("updatePost -- Error");
+         console.log("AppWrite:: updatePost -- Error");
       }
    }
 
@@ -48,14 +48,15 @@ export class Service{
       try {
          return await this.databases.deleteDocument(conf.appWriteDatabaseID, conf.appWriteCollectionID, slug)
       } catch (error) {
-         console.log("deletePost -- Error");
+         console.log("AppWrite:: deletePost -- Error");
       }
    }
+   
    async getPost(slug){
       try {
-         return await this.databases.deleteDocument(conf.appWriteDatabaseID, conf.appWriteCollectionID, slug)
+         return await this.databases.getDocument(conf.appWriteDatabaseID, conf.appWriteCollectionID, slug)
       } catch (error) {
-         console.log("getPost -- Error");
+         console.log("AppWrite:: getPost -- Error");
       }
    }
 
@@ -69,7 +70,7 @@ export class Service{
          )
          
       } catch (error) {
-         console.log("getPosts -- error");         
+         console.log("AppWrite:: getPosts -- error");         
       }
    }
 
@@ -81,8 +82,8 @@ export class Service{
             file
          )
       } catch (error) {
-         console.log("uploadFile -- error");         
-         throw error
+         console.log("AppWrite:: uploadFile -- error", error);         
+         return false
       }
    }
 
@@ -93,15 +94,17 @@ export class Service{
             file);
             return true;
       } catch (error) {
-         console.log("deleteFile -- error");         
+         console.log("AppWrite:: deleteFile -- error");         
          throw error
       }
    }
    async getFilePreview(file){
       try {
-         return this.storage.getFilePreview(conf.appWriteBucketID, file)  
+         const f = this.storage.getFilePreview(conf.appWriteBucketID, file)
+
+         return await f
       } catch (error) {
-         console.log("getFilePreview -- error");         
+         console.log("AppWrite:: getFilePreview -- error");         
       }
    }
 }

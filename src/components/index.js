@@ -12,8 +12,8 @@ import PostForm from "../components/postForm/PostForm.jsx"
 import Button from "./Button.jsx";
 import Input from "./Input.jsx";
 import Select from "./Select.jsx";
-
+import Loader, {isShowLoader, isHideLoader} from "./Loader.jsx";
 export{
    Header, Footer, Container, Logo, LogoutBtn, RTE, Signup, 
-   Login, AuthLayout, PostCard,PostForm, Button, Input,Select
+   Login, AuthLayout, PostCard,PostForm, Button, Input,Select, isShowLoader, isHideLoader, Loader
 }

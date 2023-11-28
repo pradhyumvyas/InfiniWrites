@@ -3,7 +3,7 @@ import logo from '../assets/images/logo.png';
 
 function Logo({width='200px', height='50px'}) {
   return (
-    <img src={logo} alt="Logo" srcset="" width={width} height={height} />
+    <img src={logo} alt="Logo" width={width} height={height} />
   )
 }
 

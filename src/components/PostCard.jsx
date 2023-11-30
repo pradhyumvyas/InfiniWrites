@@ -10,7 +10,7 @@ function PostCard({$id, title, image, userId}) {
 
   const userData = useSelector((state) => state.auth.userData);
 
-  const isAuthor = userId && userData ? userId === userData.data.$id : false;
+  const isAuthor = userId && userData ? userId === userData.data?.$id : false;
 
   React.useEffect(() => {
     appwriteService.getFilePreview(image)
@@ -24,16 +24,16 @@ function PostCard({$id, title, image, userId}) {
 
   return (
     <Link to={`/post/${$id}`}>
-      <div className="w-full bg-gray-100 rounded-xl p-4">
+      <div className="w-30 bg-gray-100 rounded-xl p-4">
           {isAuthor && (
-            <div className="flex justify-between bg-slate-300 w-10">
+            <div className="absolute flex justify-between align-right bg-orange-400 w-10">
             <div className="flex p-1">
               <img src={ownerIcon} alt="owner" title='Owner' className='w-6 h-6' />
             </div>
           </div>
           )}
          <div className="w-full justify-center mb-4">
-            <img src={img} alt={title} className='rounded-xl' />
+            <img src={img} alt={title} className='rounded-xl' height={20} width={300}/>
          </div>
          <h2 className='text-xl font-bold'
          >{title}</h2>

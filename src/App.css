@@ -1,7 +1,7 @@
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1rem;
   text-align: center;
 }
 
@@ -66,4 +66,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: absolute;
+  filter: drop-shadow(2px 4px 6px black);
+  right: 50%;
+  z-index: 1;
 }

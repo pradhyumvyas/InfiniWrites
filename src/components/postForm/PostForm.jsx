@@ -1,6 +1,6 @@
 import React,{useCallback, useEffect} from 'react'
 import { useForm } from 'react-hook-form'
-import {Button, Input, Select, RTE} from '../index.js'
+import {Button, Input, Select, RTE, isShowLoader, isHideLoader} from '../index.js'
 import appWriteService from "../../appWrite/config.js"
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux';
@@ -24,6 +24,7 @@ function PostForm({post}) {
    const [img, setImg] = React.useState(null)
 
    const submit = async(data) => {
+      isShowLoader();
       if(post){
          const file = data.image[0]?appWriteService.uploadFile(data.image[0]):null
 
@@ -54,6 +55,7 @@ function PostForm({post}) {
             }
          }
       }
+      isHideLoader();
    }
    const slugTransform = useCallback((value) => {
       if(value && typeof value === "string"){
@@ -127,7 +129,7 @@ function PostForm({post}) {
            {...register("status", { required: true })}
          />
          <Button type="submit" bgColor={post ? "bg-green-500" : undefined} className="w-full">
-           {post ? "Update" : "Submit"}
+           {post ? "Update" : "Add"}
          </Button>
       </div>
    </form>

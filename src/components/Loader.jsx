@@ -5,6 +5,7 @@ import React from 'react'
    if(loaderDisplay){
       loaderDisplay.style.display = "flex";
       document.getElementsByClassName("loader-container")[0].style.height = "50vh";
+      document.getElementsByClassName("blur-bg-custom")[0].style.filter = "blur(8px)";
    }
 }
 
@@ -13,6 +14,7 @@ const isHideLoader=  function (){
    if(loaderDisplay){
       loaderDisplay.style.display = "none";
       document.getElementsByClassName("loader-container")[0].style.height = "0";
+      document.getElementsByClassName("blur-bg-custom")[0].style.filter = "blur(0px)";
    }
 }
 

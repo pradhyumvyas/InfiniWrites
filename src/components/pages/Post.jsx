@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import appwriteService from "../../appWrite/config.js";
-import { Button, Container } from "../index.js";
+import { Button, Container, isShowLoader, isHideLoader } from "../index.js";
 import parse from "html-react-parser";
 import { useSelector } from "react-redux";
 
@@ -12,9 +12,10 @@ export default function Post() {
     const [img, setImg] = useState(null);
     const userData = useSelector((state) => state.auth.userData);
 
-    const isAuthor = post && userData ? post.userId === userData.data.$id : false;
+    const isAuthor = post && userData ? post.userId === userData.data?.$id : false;
 
     useEffect(() => {
+        isShowLoader();
         if (slug) {
             appwriteService.getPost(slug).then((post) => {
                 if (post) {
@@ -25,8 +26,13 @@ export default function Post() {
                     })
                 }
                 else navigate("/");
+            }).finally(() => {
+                isHideLoader();
             });
-        } else navigate("/");
+        } else {
+            navigate("/");
+            isHideLoader();
+        }
     }, [slug, navigate]);
 
     const deletePost = () => {
@@ -71,3 +77,5 @@ export default function Post() {
         </div>
     ) : null;
 }
+
+

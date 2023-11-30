@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from 'react'
 import appWriteService from "../../appWrite/config"
-import {Container, PostCard} from '../index'
+import {Container, PostCard, isShowLoader, isHideLoader} from '../index'
 
 function AllPosts() {
 
    const [posts, setPosts] = useState([])
 
    useEffect(() => {
+      isShowLoader();
        appWriteService.getPosts([])
        .then((res) => {
           if(res){
@@ -15,6 +16,9 @@ function AllPosts() {
        })
        .catch((err) => {
           console.log(err)
+       })
+       .finally(() => {
+          isHideLoader();
        })
     },[])
   return (

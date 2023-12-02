@@ -50,12 +50,6 @@ export default function Post() {
     return post ? (
         <div className="py-8">
             <Container>
-                <div className="postedBy flex align-left m-4 ">
-                    <p>Blog Posted By <span className="font-semibold">
-                        <a href="javascript:void(O)"> {post.createdBy}
-                            </a></span>
-                    </p>
-                </div>
                 <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
                     <img
                         src={img}
@@ -77,12 +71,19 @@ export default function Post() {
                     )}
                 </div>
                 <div className="w-full mb-6">
-                    <h1 className="text-2xl font-bold">{post.title}</h1>
+                    <h1 className="text-2xl font-bold dark:text-white">{post.title}</h1>
                 </div>
-                <div className="browser-css">
+                <div className="browser-css dark:text-slate-400">
                     {parse(post.content)}
                     </div>
             </Container>
+            <div class="group flex items-center">
+              <img class="shrink-0 h-12 w-12 rounded-full" src="..." alt="" />
+              <div class="ltr:ml-3 rtl:mr-3">
+                <p class="text-sm font-medium text-slate-300 group-hover:text-white">{post.createdBy}</p>
+                <p class="text-sm font-medium text-slate-500 group-hover:text-slate-300">test@test.com</p>
+              </div>
+            </div>
         </div>
     ) : null;
 }

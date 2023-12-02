@@ -40,7 +40,7 @@ function Header() {
   return (
     <header className='py-2 shadow bg-slate-900'>
       <Container>
-         <nav className='flex'>
+         <nav className='flex '>
             <div className="mr-4">
                <Link to='/'>
                   <Logo />

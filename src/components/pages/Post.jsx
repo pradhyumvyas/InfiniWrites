@@ -12,7 +12,8 @@ export default function Post() {
     const [img, setImg] = useState(null);
     const userData = useSelector((state) => state.auth.userData);
 
-    const isAuthor = post && userData ? post.userId === userData.data?.$id : false;
+    const [isAuthor, setIsAuthor] = useState(null);
+
 
     useEffect(() => {
         isShowLoader();
@@ -23,6 +24,7 @@ export default function Post() {
                     appwriteService.getFilePreview(post.image)
                     .then((res) => {
                         setImg(res);
+                        setIsAuthor(post && userData ? post.userId === userData.data?.$id : false)
                     })
                 }
                 else navigate("/");
@@ -33,6 +35,7 @@ export default function Post() {
             navigate("/");
             isHideLoader();
         }
+
     }, [slug, navigate]);
 
     const deletePost = () => {
@@ -47,11 +50,17 @@ export default function Post() {
     return post ? (
         <div className="py-8">
             <Container>
+                <div className="postedBy flex align-left m-4 ">
+                    <p>Blog Posted By <span className="font-semibold">
+                        <a href="javascript:void(O)"> {post.createdBy}
+                            </a></span>
+                    </p>
+                </div>
                 <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
                     <img
                         src={img}
                         alt={post.title}
-                        className="rounded-xl"
+                        className="rounded-xl h-[300px] w-100%"
                     />
 
                     {isAuthor && (

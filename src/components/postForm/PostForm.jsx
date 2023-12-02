@@ -8,6 +8,9 @@ import { useSelector } from 'react-redux';
 
 
 function PostForm({post}) {
+   const userData = useSelector((state) => {
+      return state.auth.userData
+   })
 
    const {register, handleSubmit, watch, setValue, control, getValues} = useForm({
       defaultValues: {
@@ -18,9 +21,6 @@ function PostForm({post}) {
       }
    })
    const navigate = useNavigate()
-   const userData = useSelector((state) => {
-      return state.auth.userData
-   })
    const [img, setImg] = React.useState(null)
 
    const submit = async(data) => {
@@ -31,9 +31,9 @@ function PostForm({post}) {
          if(file){
             appWriteService.deleteFile(post.image)
          }
-
          const dbPost = await appWriteService.updatePost(post.$id,{
             ...data,
+            createdBy: userData.data.name,
             image: file ? file.$id :undefined,
          })
          if(dbPost){
@@ -48,6 +48,7 @@ function PostForm({post}) {
             data.image = fileId
             const dbPost = await appWriteService.createPost({
                ...data,
+               createdBy: userData.data.name,
                userId: userData?.data?.$id,
             })
             if(dbPost){

@@ -87,7 +87,7 @@ function PostForm({post}) {
    },[watch, slugTransform, setValue]);
    
   return (
-   <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
+   <form onSubmit={handleSubmit(submit)} className="flex flex-wrap dark:text-slate-400">
       <div className="w-2/3 px-2">
          <Input
            label="Title :"
@@ -98,7 +98,7 @@ function PostForm({post}) {
          <Input
            label="Slug :"
            placeholder="Slug"
-           className="mb-4"
+           className="mb-4 text-cyan-950"
            {...register("slug", { required: true })}
            onInput={(e) => {
                setValue("slug", slugTransform(e.currentTarget.value), { shouldValidate: true });
@@ -126,10 +126,10 @@ function PostForm({post}) {
          <Select
            options={["active", "inactive"]}
            label="Status"
-           className="mb-4"
+           className="mb-4 bg-slate-400"
            {...register("status", { required: true })}
          />
-         <Button type="submit" bgColor={post ? "bg-green-500" : undefined} className="w-full">
+         <Button type="submit" bgColor={post ? "bg-green-500" : undefined} className="w-full mt-50">
            {post ? "Update" : "Add"}
          </Button>
       </div>

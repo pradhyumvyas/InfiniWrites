@@ -28,7 +28,7 @@ function PostCard({$id, title, image, userId}) {
          <div className="w-full justify-center mb-4">
             <img src={img} alt={title} className='rounded-xl h-[200px] w-[300px]'/>
          </div>
-         <h2 className='text-xl font-bold'
+         <h2 className='text-xl font-bold dark:text-slate-400'
          >{title}</h2>
 
         {isAuthor && (

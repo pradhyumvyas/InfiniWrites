@@ -1,3 +1,26 @@
+body::-webkit-scrollbar {
+  width: 10px;
+}
+
+body::-webkit-scrollbar-track {
+  border-radius: px;
+  background: #c9cacc;
+}
+
+body::-webkit-scrollbar-track:hover {
+  background: #78797a;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: #3d5585; 
+  border-radius: 10px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background: #01143b; 
+}
+
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -70,4 +93,5 @@
   filter: drop-shadow(2px 4px 6px black);
   right: 50%;
   z-index: 1;
+  height: 10vw;
 }
